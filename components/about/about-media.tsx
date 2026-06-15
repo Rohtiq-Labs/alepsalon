@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useOptimizedVideo } from "@/hooks/use-optimized-video";
 
 const ABOUT_VIDEO_SRC = "/assets/videos/gallery/gal-03.mp4";
 
@@ -9,43 +9,27 @@ type AboutMediaProps = {
 };
 
 export const AboutMedia = ({ alt }: AboutMediaProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (motionQuery.matches) {
-          video.pause();
-          return;
-        }
-
-        if (entry.isIntersecting) {
-          void video.play().catch(() => video.pause());
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.3 },
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
+  const { videoRef, videoSrc, preload, isReady, onCanPlay, onLoadedData } =
+    useOptimizedVideo({
+      src: ABOUT_VIDEO_SRC,
+      priority: "low",
+      rootMargin: "200px",
+      threshold: 0.2,
+    });
 
   return (
-    <video
-      ref={videoRef}
-      src={ABOUT_VIDEO_SRC}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      aria-label={alt}
-    />
+    <div className={`video-shell${isReady ? " video-shell--ready" : ""}`}>
+      <video
+        ref={videoRef}
+        src={videoSrc}
+        muted
+        loop
+        playsInline
+        preload={preload}
+        aria-label={alt}
+        onCanPlay={onCanPlay}
+        onLoadedData={onLoadedData}
+      />
+    </div>
   );
 };

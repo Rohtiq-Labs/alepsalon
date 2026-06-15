@@ -34,6 +34,15 @@ export default function RootLayout({
       lang="fr"
       className={`${inter.variable} ${cormorantGaramond.variable}`}
     >
+      <head>
+        <link
+          rel="preload"
+          href="/assets/videos/hero.mp4"
+          as="fetch"
+          crossOrigin="anonymous"
+          fetchPriority="high"
+        />
+      </head>
       <body>
         <LocaleProvider>{children}</LocaleProvider>
       </body>

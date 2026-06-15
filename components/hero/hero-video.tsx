@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useOptimizedVideo } from "@/hooks/use-optimized-video";
 
 const HERO_VIDEO_SRC = "/assets/videos/hero.mp4";
 
@@ -9,43 +9,27 @@ type HeroVideoProps = {
 };
 
 export const HeroVideo = ({ alt }: HeroVideoProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const syncPlayback = () => {
-      if (motionQuery.matches) {
-        video.pause();
-        return;
-      }
-
-      void video.play().catch(() => {
-        video.pause();
-      });
-    };
-
-    syncPlayback();
-    motionQuery.addEventListener("change", syncPlayback);
-
-    return () => {
-      motionQuery.removeEventListener("change", syncPlayback);
-    };
-  }, []);
+  const { videoRef, videoSrc, preload, isReady, onCanPlay, onLoadedData } =
+    useOptimizedVideo({
+      src: HERO_VIDEO_SRC,
+      priority: "high",
+      eager: true,
+    });
 
   return (
-    <video
-      ref={videoRef}
-      src={HERO_VIDEO_SRC}
-      muted
-      loop
-      playsInline
-      autoPlay
-      preload="auto"
-      aria-label={alt}
-    />
+    <div className={`video-shell${isReady ? " video-shell--ready" : ""}`}>
+      <video
+        ref={videoRef}
+        src={videoSrc}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload={preload}
+        aria-label={alt}
+        onCanPlay={onCanPlay}
+        onLoadedData={onLoadedData}
+      />
+    </div>
   );
 };
