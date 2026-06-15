@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alep Salon — Biel, Switzerland</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --bg: #FAFAFA;
+      --section-bg: #F4F4F4;
+      --text: #1A1A1A;
+      --muted: #6B6B6B;
+      --sand: #C9B18A;
+      --border: #E5E5E5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--sand); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-book {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--black);
+      padding: 10px 24px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-book:hover { background: var(--sand); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 80px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 28px;
+    }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 5.5vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 32px;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--sand);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 380px;
+      margin-bottom: 52px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .btn-primary {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--black);
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--sand); }
+
+    .btn-ghost {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--sand); border-color: var(--sand); }
+
+    .hero-meta {
+      display: flex;
+      gap: 40px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--section-bg);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(17,17,17,0.3), transparent);
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--black);
+      overflow: hidden;
+      padding: 14px 0;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 28s linear infinite;
+    }
+
+    .ticker-text {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sand);
+      padding: 0 48px;
+    }
+
+    .ticker-dot { opacity: 0.4; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1.1;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 100px 80px;
+      background: var(--bg);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 48px 40px;
+      position: relative;
+      transition: background 0.25s;
+    }
+
+    .service-card:hover { background: var(--section-bg); }
+
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--sand);
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+    }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .service-price {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .service-price span {
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 12px;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--section-bg);
+      padding: 100px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      background: var(--black);
+      color: var(--sand);
+      padding: 24px 28px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .about-content {}
+
+    .about-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .about-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .about-details {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .about-detail {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .about-detail::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--sand);
+      flex-shrink: 0;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      padding: 100px 80px;
+      background: var(--bg);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 6px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      background: var(--section-bg);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      aspect-ratio: 3/4;
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item.wide {
+      grid-column: span 2;
+    }
+
+    .gallery-item.wide img {
+      aspect-ratio: 3/2;
+    }
+
+    /* ── BOOKING ── */
+    .booking {
+      background: var(--black);
+      padding: 100px 80px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .booking-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 300;
+      color: var(--bg);
+      line-height: 1.05;
+    }
+
+    .booking-title em {
+      font-style: italic;
+      color: var(--sand);
+    }
+
+    .booking-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .btn-sand {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--sand);
+      padding: 18px 40px;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+
+    .btn-sand:hover { opacity: 0.85; }
+
+    .btn-outline-light {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 18px 40px;
+      text-decoration: none;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .btn-outline-light:hover { border-color: rgba(255,255,255,0.5); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 60px 80px 40px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 36px;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--bg);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span { color: var(--sand); }
+
+    .footer-tagline {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-col-title {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--bg); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .footer-insta {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sand);
+      text-decoration: none;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 60px 24px 48px; order: 2; }
+      .hero-image { min-height: 60vw; order: 1; }
+      .services { padding: 64px 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; padding: 64px 24px; gap: 48px; }
+      .about-badge { right: 0; bottom: -12px; }
+      .gallery { padding: 64px 24px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.wide { grid-column: span 2; }
+      .booking { grid-template-columns: 1fr; padding: 64px 24px; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; padding: 40px 0; }
+      footer { padding: 48px 24px 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>A</span>lep Salon</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-book" href="https://salonkee.ch/salon/alep-salon" target="_blank" rel="noopener">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Biel / Bienne, Switzerland</p>
+    <h1 class="hero-h1">Your cut.<br>Your <em>confidence.</em><br>Crafted precisely.</h1>
+    <p class="hero-sub">Alep Salon is a modern barber studio blending French style with Swiss precision. Clean fades. Sharp lines. Every time.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://salonkee.ch/salon/alep-salon" target="_blank" rel="noopener">Book an Appointment</a>
+      <a class="btn-ghost" href="#services">See Services</a>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <div class="hero-stat-num">8.9k</div>
+        <div class="hero-stat-label">Followers</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">827</div>
+        <div class="hero-stat-label">Cuts Shared</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Precision</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img
+      src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=900&q=85&auto=format&fit=crop"
+      alt="Precision barbering at Alep Salon"
+    />
+    <div class="hero-image-overlay"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <!-- doubled for seamless loop -->
+    <span class="ticker-text">Clean Cuts <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Swiss Precision <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Modern Style <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Biel / Bienne <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Professional Grooming <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Fresh Every Time <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Clean Cuts <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Swiss Precision <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Modern Style <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Biel / Bienne <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Professional Grooming <span class="ticker-dot">·</span></span>
+    <span class="ticker-text">Fresh Every Time <span class="ticker-dot">·</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <p class="section-eyebrow">What We Offer</p>
+    <h2 class="section-title">Services</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-name">Classic Haircut</div>
+      <p class="service-desc">A precise cut tailored to your face shape and style. Includes wash, cut, and finish.</p>
+      <div class="service-price">CHF 35 <span>/ 45 min</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-name">Fade & Taper</div>
+      <p class="service-desc">Skin, low, mid, or high — every fade is executed clean and consistent from neckline to top.</p>
+      <div class="service-price">CHF 40 <span>/ 50 min</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-name">Burst Fade</div>
+      <p class="service-desc">The signature Alep look. A curved fade around the ear that adds shape and dimension to any style.</p>
+      <div class="service-price">CHF 45 <span>/ 55 min</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-name">Beard Trim</div>
+      <p class="service-desc">Shape, line, and detail your beard to complement your cut perfectly.</p>
+      <div class="service-price">CHF 20 <span>/ 25 min</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-name">Cut + Beard</div>
+      <p class="service-desc">The full package. Haircut, fade, and beard trim for a complete, polished look.</p>
+      <div class="service-price">CHF 55 <span>/ 70 min</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-name">Kids' Cut</div>
+      <p class="service-desc">Clean and quick. A careful cut for boys, made comfortable from start to finish.</p>
+      <div class="service-price">CHF 25 <span>/ 30 min</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img
+      src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=85&auto=format&fit=crop"
+      alt="Barber at work in Alep Salon"
+    />
+    <div class="about-badge">Est.<br>Biel, CH</div>
+  </div>
+  <div class="about-content">
+    <p class="section-eyebrow">Who We Are</p>
+    <p class="about-text">"We don't just cut hair. We shape how you present yourself to the world."</p>
+    <p class="about-body">Alep Salon is a modern barber studio rooted in Biel, Switzerland. We blend the clean elegance of French barbering with Swiss attention to detail — the result is precise, consistent, and unmistakably sharp.<br><br>Every client who sits in our chair leaves looking polished and feeling confident. Whether it's your weekly maintenance or a fresh transformation, we bring the same care and craft to every cut.</p>
+    <div class="about-details">
+      <div class="about-detail">Rue de morat 10, Biel/Bienne 2502</div>
+      <div class="about-detail">Mon – Sat: 09:00 – 19:00</div>
+      <div class="about-detail">Walk-ins welcome · Appointments preferred</div>
+      <div class="about-detail">@alepsalon on Instagram</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-header">
+    <p class="section-eyebrow">Fresh From the Chair</p>
+    <h2 class="section-title">Our Work</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item wide">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=900&q=80&auto=format&fit=crop" alt="Fade haircut" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1622287162716-f311baa1a2b8?w=500&q=80&auto=format&fit=crop" alt="Clean taper" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80&auto=format&fit=crop" alt="Barber styling" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500&q=80&auto=format&fit=crop" alt="Precise fade" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1589450782055-e6e66dba5aa8?w=500&q=80&auto=format&fit=crop" alt="Modern haircut" />
+    </div>
+    <div class="gallery-item wide">
+      <img src="https://images.unsplash.com/photo-1569585723035-0e9e4be57cf3?w=900&q=80&auto=format&fit=crop" alt="Barbershop interior" />
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING CTA -->
+<section class="booking" id="contact">
+  <div class="booking-title">
+    Ready for your<br>next <em>clean cut?</em>
+  </div>
+  <div class="booking-actions">
+    <a class="btn-sand" href="https://salonkee.ch/salon/alep-salon" target="_blank" rel="noopener">Book Online</a>
+    <a class="btn-outline-light" href="https://www.instagram.com/alepsalon/" target="_blank" rel="noopener">See Work on Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo"><span>A</span>lep Salon</div>
+      <p class="footer-tagline">Modern barber studio in Biel, Switzerland. Clean cuts, Swiss precision, built for confidence.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul>
+        <li><a href="#services">Classic Haircut</a></li>
+        <li><a href="#services">Fade & Taper</a></li>
+        <li><a href="#services">Burst Fade</a></li>
+        <li><a href="#services">Beard Trim</a></li>
+        <li><a href="#services">Kids' Cut</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Visit</div>
+      <ul>
+        <li><a href="#">Rue de morat 10</a></li>
+        <li><a href="#">Biel/Bienne 2502</a></li>
+        <li><a href="#">Switzerland</a></li>
+        <li><a href="#">Mon–Sat 09:00–19:00</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Connect</div>
+      <ul>
+        <li><a href="https://www.instagram.com/alepsalon/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://salonkee.ch/salon/alep-salon" target="_blank" rel="noopener">Book Appointment</a></li>
+        <li><a href="https://maps.google.com" target="_blank" rel="noopener">Google Maps</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Alep Salon · Biel, Switzerland · All rights reserved</span>
+    <a class="footer-insta" href="https://www.instagram.com/alepsalon/" target="_blank" rel="noopener">@alepsalon</a>
+  </div>
+</footer>
+
+</body>
+</html>
